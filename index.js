@@ -39,8 +39,9 @@ app.post('/contact', (req, res) => {
     text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
     html: `<p><b>Name:</b> ${name}</p><p><b>Email:</b> ${email}</p><p><b>Message:</b><br>${message.replace(/\n/g, '<br>')}</p>`
   };
-
+  console.log('Attempting to send email...');
   transporter.sendMail(mailOptions, (error, info) => {
+    console.log('Inside sendMail callback');
     if (error) {
       console.error('Error sending email:', error);
       return res.status(500).json({ success: false, message: 'Failed to send email.' });
